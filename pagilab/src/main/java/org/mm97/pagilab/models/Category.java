@@ -1,0 +1,52 @@
+package org.mm97.pagilab.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.Hibernate;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+@Entity
+@Table(name = "category", catalog = "postgres")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Category implements Serializable {
+
+    @Id
+    @Column(name = "category_id", unique = true, nullable = false)
+    private int categoryId;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "last_update", nullable = false, length = 35)
+    private Timestamp lastUpdate;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    private Set<FilmCategory> filmCategories = new HashSet<>();
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Category category = (Category) o;
+        return categoryId != 0 && categoryId == category.categoryId;
+    }
+
+    @Override
+    public final int hashCode() {
+        return Objects.hash(Hibernate.getClass(this), categoryId);
+    }
+}
