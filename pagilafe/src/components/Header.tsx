@@ -9,9 +9,6 @@ export default function Header() {
                 </Link>
 
                 <nav className="nav">
-                    <NavLink to="/" className="nav__link">
-                        Home
-                    </NavLink>
                     <NavLink to="/films" className="nav__link">
                         Films
                     </NavLink>
@@ -23,6 +20,9 @@ export default function Header() {
                     </NavLink>
                     <NavLink to="/search" className="nav__link">
                         Search
+                    </NavLink>
+                    <NavLink to="/info" className="nav__link">
+                        Info
                     </NavLink>
                 </nav>
             </div>

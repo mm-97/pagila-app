@@ -5,7 +5,7 @@ import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import SectionTitle from "../components/SectionTitle";
 
-export default function HomePage() {
+export default function InfoPage() {
     const [info, setInfo] = useState<ApiInfoDto | null>(null);
     const [health, setHealth] = useState<ApiInfoDto | null>(null);
     const [loading, setLoading] = useState(true);
