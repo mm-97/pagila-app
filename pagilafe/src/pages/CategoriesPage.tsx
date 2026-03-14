@@ -11,12 +11,13 @@ export default function CategoriesPage() {
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const pageSize = 20
 
     useEffect(() => {
         async function load() {
             try {
                 setLoading(true);
-                const result = await api.getCategories(page, 20);
+                const result = await api.getCategories(page, pageSize);
                 setData(result);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "Unknown error");
@@ -37,9 +38,9 @@ export default function CategoriesPage() {
             <SectionTitle title="Categories" subtitle="Film categories exposed by the Spring Boot API."/>
 
             <div className="list-panel">
-                {data.content.map((category) => (
+                {data.content.map((category: CategoryDto, index:number) => (
                     <div key={category.categoryId} className="list-row panel-animated">
-                        <span>{category.categoryId}</span>
+                        <span>{page * pageSize + index + 1}</span>
                         <span>{category.name}</span>
                     </div>
                 ))}

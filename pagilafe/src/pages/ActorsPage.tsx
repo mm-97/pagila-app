@@ -11,12 +11,13 @@ export default function ActorsPage() {
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const pagesize = 20;
 
     useEffect(() => {
         async function load() {
             try {
                 setLoading(true);
-                const result = await api.getActors(page, 20);
+                const result = await api.getActors(page, pagesize);
                 setData(result);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "Unknown error");
@@ -41,7 +42,7 @@ export default function ActorsPage() {
             <div className="list-panel">
                 {data.content.map((actor: ActorDto, index: number) => (
                     <div key={actor.actorId} className="list-row list-row--actor panel-animated">
-                        <span>{index + 1}</span>
+                        <span>{page * pagesize + index + 1}</span>
                         <img
                             src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${actor.actorId}`}
                             alt={`${actor.firstName} ${actor.lastName}`}
