@@ -56,13 +56,13 @@ export default function SearchPage() {
 
         if (!isDeletingPlaceholder && placeholderCharIndex < currentPhrase.length) {
             // start writing
-            timeout = base_timeout /currentPhrase.length;
+            timeout = base_timeout / currentPhrase.length;
         } else if (!isDeletingPlaceholder && placeholderCharIndex === currentPhrase.length) {
             // stop writing
-            timeout = base_timeout/3.14;
+            timeout = base_timeout / 3.14;
         } else if (isDeletingPlaceholder && placeholderCharIndex > 0) {
             // start deleting
-            timeout = base_timeout /(currentPhrase.length*1.2);
+            timeout = base_timeout / (currentPhrase.length * 1.2);
         } else if (isDeletingPlaceholder && placeholderCharIndex === 0) {
             // stop deleting
             timeout = 100;

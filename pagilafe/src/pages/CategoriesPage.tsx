@@ -38,7 +38,7 @@ export default function CategoriesPage() {
             <SectionTitle title="Categories" subtitle="Film categories exposed by the Spring Boot API."/>
 
             <div className="list-panel">
-                {data.content.map((category: CategoryDto, index:number) => (
+                {data.content.map((category: CategoryDto, index: number) => (
                     <div key={category.categoryId} className="list-row panel-animated">
                         <span>{page * pageSize + index + 1}</span>
                         <span>{category.name}</span>
