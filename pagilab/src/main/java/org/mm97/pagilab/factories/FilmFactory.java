@@ -21,7 +21,7 @@ public final class FilmFactory {
         film.setRentalRate(createFilmRequestDto.rentalRate());
         film.setLength(createFilmRequestDto.length());
         film.setReplacementCost(createFilmRequestDto.replacementCost());
-        film.setRating(createFilmRequestDto.rating());
+        film.setRating(createFilmRequestDto.rating().getDbValue());
         film.setLastUpdate(now);
 
         return film;

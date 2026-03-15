@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnTransformer;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -21,8 +24,9 @@ import java.util.Set;
 public class Film implements java.io.Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id", unique = true, nullable = false)
-    private int filmId;
+    private Integer filmId;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -45,7 +49,11 @@ public class Film implements java.io.Serializable {
     @Column(name = "replacement_cost", nullable = false, precision = 5, scale = 2)
     private BigDecimal replacementCost;
 
+    @Column(name = "language_id", nullable = false)
+    private Integer languageId = 1;
+
     @Column(name = "rating")
+    @ColumnTransformer(write = "?::mpaa_rating")
     private String rating;
 
     @Column(name = "last_update", nullable = false)

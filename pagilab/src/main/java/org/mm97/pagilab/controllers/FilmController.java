@@ -107,7 +107,7 @@ public class FilmController {
         );
     }
 
-    @PostMapping("add/film")
+    @PostMapping("/add")
     public ResponseEntity<FilmSummaryDto> createFilm(@RequestBody CreateFilmRequestDto request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

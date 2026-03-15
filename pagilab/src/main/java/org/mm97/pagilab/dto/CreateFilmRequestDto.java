@@ -1,6 +1,8 @@
 package org.mm97.pagilab.dto;
 
 
+import org.mm97.pagilab.models.MpaaRating;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public record CreateFilmRequestDto(
         BigDecimal rentalRate,
         Short length,
         BigDecimal replacementCost,
-        String rating,
+        MpaaRating rating,
         List<Integer> actorIds,
         List<Integer> categoryIds
 ) {

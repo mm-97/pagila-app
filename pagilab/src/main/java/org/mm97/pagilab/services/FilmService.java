@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,7 +23,6 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class FilmService {
 
-    public final Timestamp NOW = Timestamp.from(Instant.now());
     private final FilmRepository filmRepository;
     private final ActorRepository actorRepository;
     private final CategoryRepository categoryRepository;
@@ -141,17 +138,11 @@ public class FilmService {
 
         Film savedFilm = filmRepository.save(film);
 
-        if (!actors.isEmpty()) {
-            List<FilmActor> filmActors = FilmFactory.createFilmActors(savedFilm, actors);
+        List<FilmActor> filmActors = FilmFactory.createFilmActors(savedFilm, actors);
+        filmActorRepository.saveAll(filmActors);
 
-            filmActorRepository.saveAll(filmActors);
-        }
-
-        if (!categories.isEmpty()) {
-            List<FilmCategory> filmCategories = FilmFactory.createFilmCategories(film, categories);
-
-            filmCategoryRepository.saveAll(filmCategories);
-        }
+        List<FilmCategory> filmCategories = FilmFactory.createFilmCategories(savedFilm, categories);
+        filmCategoryRepository.saveAll(filmCategories);
 
         return savedFilm;
     }

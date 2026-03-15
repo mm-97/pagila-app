@@ -5,6 +5,7 @@ import org.mm97.pagilab.models.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public final class ApiMapper {
 
@@ -42,7 +43,7 @@ public final class ApiMapper {
                 ? List.of()
                 : film.getFilmActors().stream()
                 .map(FilmActor::getActor)
-                .filter(a -> a != null)
+                .filter(Objects::nonNull)
                 .map(ApiMapper::toActorDto)
                 .sorted(Comparator.comparing(ActorDto::lastName).thenComparing(ActorDto::firstName))
                 .toList();
@@ -51,7 +52,7 @@ public final class ApiMapper {
                 ? List.of()
                 : film.getFilmCategories().stream()
                 .map(FilmCategory::getCategory)
-                .filter(c -> c != null)
+                .filter(Objects::nonNull)
                 .map(ApiMapper::toCategoryDto)
                 .sorted(Comparator.comparing(CategoryDto::name))
                 .toList();

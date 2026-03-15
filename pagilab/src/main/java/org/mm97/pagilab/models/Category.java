@@ -23,6 +23,7 @@ import java.util.Set;
 public class Category implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id", unique = true, nullable = false)
     private int categoryId;
 
