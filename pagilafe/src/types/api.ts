@@ -49,3 +49,16 @@ export type PageResponse<T> = {
     numberOfElements: number;
     empty: boolean;
 };
+
+export type CreateFilmRequestDto = {
+        title: string;
+        description: string;
+        releaseYear: number | null;
+        rentalDuration: number;
+        rentalRate: number;
+        length: number | null;
+        replacementCost: number;
+        rating: string;
+        actorIds: number[];
+        categoryIds: number[];
+}

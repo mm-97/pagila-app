@@ -7,6 +7,7 @@ import FilmDetailPage from "./pages/FilmDetailPage";
 import ActorsPage from "./pages/ActorsPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage.tsx";
+import AddFilmPage from "./pages/AddFilmPage.tsx";
 
 export default function App() {
     return (
@@ -21,6 +22,7 @@ export default function App() {
                         <Route path="/actors" element={<ActorsPage/>}/>
                         <Route path="/categories" element={<CategoriesPage/>}/>
                         <Route path="/search" element={<SearchPage/>}/>
+                        <Route path="/addFilm" element={<AddFilmPage/>}/>
                         <Route path="/info" element={<InfoPage/>}/>
                     </Routes>
                 </main>

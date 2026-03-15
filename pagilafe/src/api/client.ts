@@ -5,6 +5,7 @@ import type {
     FilmDetailDto,
     FilmSummaryDto,
     PageResponse,
+    CreateFilmRequestDto,
 } from "../types/api";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080";
@@ -46,4 +47,20 @@ export const api = {
             `/api/films/search?q=${encodeURIComponent(query)}&page=${page}&size=${size}`,
             signal
         ),
+    createFilm: async (payload: CreateFilmRequestDto) => {
+        const response = await fetch(`${API_BASE}/api/films/add`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            const text = await response.text();
+            throw new Error(text || `Request failed with status ${response.status}`);
+        }
+
+        return response.json() as Promise<FilmSummaryDto>;
+    },
 };

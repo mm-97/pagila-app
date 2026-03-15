@@ -1,8 +1,7 @@
 import {Link, NavLink} from "react-router-dom";
 
 export default function Header() {
-    return (
-        <header className="header">
+    return (<header className="header">
             <div className="container header__inner">
                 <Link to="/" className="brand">
                     PagilaLab
@@ -21,11 +20,13 @@ export default function Header() {
                     <NavLink to="/search" className="nav__link">
                         Search
                     </NavLink>
+                    <NavLink to="/addFilm" className="nav__link">
+                        Add Film
+                    </NavLink>
                     <NavLink to="/info" className="nav__link">
                         Info
                     </NavLink>
                 </nav>
             </div>
-        </header>
-    );
+        </header>);
 }
