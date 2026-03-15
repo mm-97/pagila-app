@@ -1,7 +1,9 @@
 package org.mm97.pagilab.services;
 
+import lombok.AllArgsConstructor;
 import org.mm97.pagilab.dto.CreateFilmRequestDto;
 import org.mm97.pagilab.exceptions.ResourceNotFoundException;
+import org.mm97.pagilab.factories.FilmFactory;
 import org.mm97.pagilab.models.*;
 import org.mm97.pagilab.repositories.*;
 import org.springframework.data.domain.Page;
@@ -19,22 +21,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 @Transactional(readOnly = true)
 public class FilmService {
 
+    public final Timestamp NOW = Timestamp.from(Instant.now());
     private final FilmRepository filmRepository;
     private final ActorRepository actorRepository;
     private final CategoryRepository categoryRepository;
     private final FilmActorRepository filmActorRepository;
     private final FilmCategoryRepository filmCategoryRepository;
-
-    public FilmService(FilmRepository filmRepository, ActorRepository actorRepository, CategoryRepository categoryRepository, FilmActorRepository filmActorRepository, FilmCategoryRepository filmCategoryRepository) {
-        this.filmRepository = filmRepository;
-        this.actorRepository = actorRepository;
-        this.categoryRepository = categoryRepository;
-        this.filmActorRepository = filmActorRepository;
-        this.filmCategoryRepository = filmCategoryRepository;
-    }
 
     public Page<Film> getFilmPage(Pageable pageable) {
         return filmRepository.findAll(pageable);
@@ -141,45 +137,18 @@ public class FilmService {
         validateFoundActors(actorIds, actors);
         validateFoundCategories(categoryIds, categories);
 
-        Film film = new Film();
-        film.setTitle(title);
-        film.setDescription(request.description());
-        film.setReleaseYear(request.releaseYear());
-        film.setRentalDuration(rentalDuration);
-        film.setRentalRate(rentalRate);
-        film.setLength(request.length());
-        film.setReplacementCost(replacementCost);
-        film.setRating(request.rating());
-        film.setLastUpdate(Timestamp.from(Instant.now()));
+        Film film = FilmFactory.createFilm(request);
 
         Film savedFilm = filmRepository.save(film);
 
         if (!actors.isEmpty()) {
-            List<FilmActor> filmActors = actors.stream()
-                    .map(actor -> {
-                        FilmActor filmActor = new FilmActor();
-                        filmActor.setId(new FilmActorId(actor.getActorId(), savedFilm.getFilmId()));
-                        filmActor.setActor(actor);
-                        filmActor.setFilm(savedFilm);
-                        filmActor.setLastUpdate(Timestamp.from(Instant.now()));
-                        return filmActor;
-                    })
-                    .toList();
+            List<FilmActor> filmActors = FilmFactory.createFilmActors(savedFilm, actors);
 
             filmActorRepository.saveAll(filmActors);
         }
 
         if (!categories.isEmpty()) {
-            List<FilmCategory> filmCategories = categories.stream()
-                    .map(category -> {
-                        FilmCategory filmCategory = new FilmCategory();
-                        filmCategory.setId(new FilmCategoryId(category.getCategoryId(), savedFilm.getFilmId()));
-                        filmCategory.setCategory(category);
-                        filmCategory.setFilm(savedFilm);
-                        filmCategory.setLastUpdate(Timestamp.from(Instant.now()));
-                        return filmCategory;
-                    })
-                    .toList();
+            List<FilmCategory> filmCategories = FilmFactory.createFilmCategories(film, categories);
 
             filmCategoryRepository.saveAll(filmCategories);
         }
