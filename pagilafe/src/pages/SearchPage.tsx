@@ -7,15 +7,7 @@ import Loading from "../components/Loading.tsx";
 import Pagination from "../components/Pagination.tsx";
 import SectionTitle from "../components/SectionTitle.tsx";
 
-const PLACEHOLDERS = [
-    "Search by movie name or description...",
-    "Try: Pinocchio...",
-    "Try: A Fanciful Saga...",
-    "Try: Clones...",
-    "Try: A Insightful Saga...",
-    "Try: Love...",
-    "Try: Alien...",
-];
+const PLACEHOLDERS = ["Search by movie name or description...", "Try: Pinocchio...", "Try: A Fanciful Saga...", "Try: Clones...", "Try: A Insightful Saga...", "Try: Love...", "Try: Alien...",];
 
 function useDebouncedValue<T>(value: T, delay = 400): T {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -142,8 +134,7 @@ export default function SearchPage() {
     const hasQuery = debouncedQuery.length > 0;
     const totalResults = data?.totalElements ?? 0;
 
-    return (
-        <div className="page">
+    return (<div className="page">
             <SectionTitle
                 title="Search"
                 subtitle="Search films by title or description with live results."
@@ -178,29 +169,23 @@ export default function SearchPage() {
                 </p>
             </div>
 
-            {!trimmedInput && (
-                <div className="panel">
+            {!trimmedInput && (<div className="panel">
                     Start typing to search films by title or description.
-                </div>
-            )}
+                </div>)}
 
             {loading && <Loading label="Searching films..."/>}
 
             {error && !loading && <ErrorMessage message={error}/>}
 
-            {hasQuery && !loading && !error && (
-                <>
+            {hasQuery && !loading && !error && (<>
                     <div className="panel">
                         Found {totalResults} result{totalResults === 1 ? "" : "s"} for{" "}
                         <strong>{debouncedQuery}</strong>
                     </div>
 
-                    {data && data.content.length > 0 ? (
-                        <>
+                    {data && data.content.length > 0 ? (<>
                             <div className="grid grid--cards">
-                                {data.content.map((film) => (
-                                    <FilmCard key={film.filmId} film={film}/>
-                                ))}
+                                {data.content.map((film) => (<FilmCard key={film.filmId} film={film}/>))}
                             </div>
 
                             <Pagination
@@ -209,12 +194,7 @@ export default function SearchPage() {
                                 onPrev={() => setPage((p) => Math.max(0, p - 1))}
                                 onNext={() => setPage((p) => Math.min(data.totalPages - 1, p + 1))}
                             />
-                        </>
-                    ) : (
-                        <div className="panel">No films found.</div>
-                    )}
-                </>
-            )}
-        </div>
-    );
+                        </>) : (<div className="panel">No films found.</div>)}
+                </>)}
+        </div>);
 }

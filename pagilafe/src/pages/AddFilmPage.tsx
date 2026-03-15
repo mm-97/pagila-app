@@ -125,134 +125,134 @@ export default function AddFilmPage() {
     }
 
     return (<div className="page">
-            <SectionTitle
-                title="Add Film"
-                subtitle="Create a new film and link actors and categories through a multi-select form."
-            />
+        <SectionTitle
+            title="Add Film"
+            subtitle="Create a new film and link actors and categories through a multi-select form."
+        />
 
-            <div className="panel panel-animated form-panel">
-                <div className="form-grid">
-                    <label htmlFor={"search-input"} className="form-field">
-                        <span>Title *</span>
-                        <input
-                            value={form.title}
-                            onChange={(e) => updateField("title", e.target.value)}
-                            className="search-input"
-                        />
-                    </label>
-
-                    <label className="form-field">
-                        <span>Rating</span>
-                        <select
-                            value={form.rating}
-                            onChange={(e) => updateField("rating", e.target.value)}
-                            className="form-select"
-                        >
-                            {RATING_OPTIONS.map((rating) => (<option key={rating} value={rating}>
-                                    {rating}
-                                </option>))}
-                        </select>
-                    </label>
-
-                    <label className="form-field form-field--full">
-                        <span>Description</span>
-                        <textarea
-                            value={form.description}
-                            onChange={(e) => updateField("description", e.target.value)}
-                            className="search-input form-textarea"
-                        />
-                    </label>
-
-                    <label className="form-field">
-                        <span>Release Year</span>
-                        <input
-                            type="number"
-                            value={form.releaseYear}
-                            onChange={(e) => updateField("releaseYear", e.target.value)}
-                            className="search-input"
-                        />
-                    </label>
-
-                    <label className="form-field">
-                        <span>Rental Duration *</span>
-                        <input
-                            type="number"
-                            value={form.rentalDuration}
-                            onChange={(e) => updateField("rentalDuration", e.target.value)}
-                            className="search-input"
-                        />
-                    </label>
-
-                    <label className="form-field">
-                        <span>Rental Rate *</span>
-                        <input
-                            type="number"
-                            step="0.01"
-                            value={form.rentalRate}
-                            onChange={(e) => updateField("rentalRate", e.target.value)}
-                            className="search-input"
-                        />
-                    </label>
-
-                    <label className="form-field">
-                        <span>Length</span>
-                        <input
-                            type="number"
-                            value={form.length}
-                            onChange={(e) => updateField("length", e.target.value)}
-                            className="search-input"
-                        />
-                    </label>
-
-                    <label className="form-field">
-                        <span>Replacement Cost *</span>
-                        <input
-                            type="number"
-                            step="0.01"
-                            value={form.replacementCost}
-                            onChange={(e) => updateField("replacementCost", e.target.value)}
-                            className="search-input"
-                        />
-                    </label>
-
-                    <SelectableList
-                        title="Actors"
-                        loading={loadingOptions}
-                        items={actors}
-                        selectedIds={selectedActorIds}
-                        getId={(actor) => actor.actorId}
-                        getLabel={(actor) => `${actor.firstName} ${actor.lastName}`}
-                        onToggle={toggleActor}
-                        helpText="Select one or more actors."
-                        loadingText="Loading actors..."
+        <div className="panel panel-animated form-panel">
+            <div className="form-grid">
+                <label htmlFor={"search-input"} className="form-field">
+                    <span>Title *</span>
+                    <input
+                        value={form.title}
+                        onChange={(e) => updateField("title", e.target.value)}
+                        className="search-input"
                     />
+                </label>
 
-                    <SelectableList
-                        title="Categories"
-                        loading={loadingOptions}
-                        items={categories}
-                        selectedIds={selectedCategoryIds}
-                        getId={(category) => category.categoryId}
-                        getLabel={(category) => category.name}
-                        onToggle={toggleCategory}
-                        helpText="Select one or more categories."
-                        loadingText="Loading categories..."
-                    />
-                </div>
-
-                <div className="form-actions">
-                    <button
-                        type="button"
-                        onClick={handleSubmit}
-                        disabled={loading || loadingOptions || !form.title.trim()}
+                <label className="form-field">
+                    <span>Rating</span>
+                    <select
+                        value={form.rating}
+                        onChange={(e) => updateField("rating", e.target.value)}
+                        className="form-select"
                     >
-                        Create Film
-                    </button>
-                </div>
+                        {RATING_OPTIONS.map((rating) => (<option key={rating} value={rating}>
+                            {rating}
+                        </option>))}
+                    </select>
+                </label>
+
+                <label className="form-field form-field--full">
+                    <span>Description</span>
+                    <textarea
+                        value={form.description}
+                        onChange={(e) => updateField("description", e.target.value)}
+                        className="search-input form-textarea"
+                    />
+                </label>
+
+                <label className="form-field">
+                    <span>Release Year</span>
+                    <input
+                        type="number"
+                        value={form.releaseYear}
+                        onChange={(e) => updateField("releaseYear", e.target.value)}
+                        className="search-input"
+                    />
+                </label>
+
+                <label className="form-field">
+                    <span>Rental Duration *</span>
+                    <input
+                        type="number"
+                        value={form.rentalDuration}
+                        onChange={(e) => updateField("rentalDuration", e.target.value)}
+                        className="search-input"
+                    />
+                </label>
+
+                <label className="form-field">
+                    <span>Rental Rate *</span>
+                    <input
+                        type="number"
+                        step="0.01"
+                        value={form.rentalRate}
+                        onChange={(e) => updateField("rentalRate", e.target.value)}
+                        className="search-input"
+                    />
+                </label>
+
+                <label className="form-field">
+                    <span>Length</span>
+                    <input
+                        type="number"
+                        value={form.length}
+                        onChange={(e) => updateField("length", e.target.value)}
+                        className="search-input"
+                    />
+                </label>
+
+                <label className="form-field">
+                    <span>Replacement Cost *</span>
+                    <input
+                        type="number"
+                        step="0.01"
+                        value={form.replacementCost}
+                        onChange={(e) => updateField("replacementCost", e.target.value)}
+                        className="search-input"
+                    />
+                </label>
+
+                <SelectableList
+                    title="Actors"
+                    loading={loadingOptions}
+                    items={actors}
+                    selectedIds={selectedActorIds}
+                    getId={(actor) => actor.actorId}
+                    getLabel={(actor) => `${actor.firstName} ${actor.lastName}`}
+                    onToggle={toggleActor}
+                    helpText="Select one or more actors."
+                    loadingText="Loading actors..."
+                />
+
+                <SelectableList
+                    title="Categories"
+                    loading={loadingOptions}
+                    items={categories}
+                    selectedIds={selectedCategoryIds}
+                    getId={(category) => category.categoryId}
+                    getLabel={(category) => category.name}
+                    onToggle={toggleCategory}
+                    helpText="Select one or more categories."
+                    loadingText="Loading categories..."
+                />
             </div>
 
-            {loading && <Loading label="Creating film..."/>}
-            {error && <ErrorMessage message={error}/>}
-            {successMessage && <div className="panel">{successMessage}</div>}
-        </div>);
+            <div className="form-actions">
+                <button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={loading || loadingOptions || !form.title.trim()}
+                >
+                    Create Film
+                </button>
+            </div>
+        </div>
+
+        {loading && <Loading label="Creating film..."/>}
+        {error && <ErrorMessage message={error}/>}
+        {successMessage && <div className="panel">{successMessage}</div>}
+    </div>);
 }

@@ -1,27 +1,17 @@
 export type ApiInfoDto = {
-    name: string;
-    status: string;
-    version: string;
+    name: string; status: string; version: string;
 };
 
 export type ActorDto = {
-    actorId: number;
-    firstName: string;
-    lastName: string;
+    actorId: number; firstName: string; lastName: string;
 };
 
 export type CategoryDto = {
-    categoryId: number;
-    name: string;
+    categoryId: number; name: string;
 };
 
 export type FilmSummaryDto = {
-    filmId: number;
-    title: string;
-    description: string;
-    rating: string;
-    length: number | null;
-    rentalRate: number;
+    filmId: number; title: string; description: string; rating: string; length: number | null; rentalRate: number;
 };
 
 export type FilmDetailDto = {
@@ -51,14 +41,14 @@ export type PageResponse<T> = {
 };
 
 export type CreateFilmRequestDto = {
-        title: string;
-        description: string;
-        releaseYear: number | null;
-        rentalDuration: number;
-        rentalRate: number;
-        length: number | null;
-        replacementCost: number;
-        rating: string;
-        actorIds: number[];
-        categoryIds: number[];
+    title: string;
+    description: string;
+    releaseYear: number | null;
+    rentalDuration: number;
+    rentalRate: number;
+    length: number | null;
+    replacementCost: number;
+    rating: string;
+    actorIds: number[];
+    categoryIds: number[];
 }

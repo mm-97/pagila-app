@@ -15,10 +15,7 @@ export default function InfoPage() {
         async function load() {
             try {
                 setLoading(true);
-                const [apiInfo, healthInfo] = await Promise.all([
-                    api.getApiInfo(),
-                    api.getHealth(),
-                ]);
+                const [apiInfo, healthInfo] = await Promise.all([api.getApiInfo(), api.getHealth(),]);
                 setInfo(apiInfo);
                 setHealth(healthInfo);
             } catch (err) {
@@ -34,8 +31,7 @@ export default function InfoPage() {
     if (loading) return <Loading/>;
     if (error) return <ErrorMessage message={error}/>;
 
-    return (
-        <div className="page">
+    return (<div className="page">
             <SectionTitle
                 title="Pagila APP "
                 subtitle="A Spring Boot + PostgreSQL + React demo application."
@@ -81,6 +77,5 @@ export default function InfoPage() {
                 </div>
             </div>
 
-        </div>
-    );
+        </div>);
 }

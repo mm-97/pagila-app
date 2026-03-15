@@ -10,8 +10,7 @@ import SearchPage from "./pages/SearchPage.tsx";
 import AddFilmPage from "./pages/AddFilmPage.tsx";
 
 export default function App() {
-    return (
-        <BrowserRouter>
+    return (<BrowserRouter>
             <div className="app-shell">
                 <Header/>
                 <main className="container main-content">
@@ -28,6 +27,5 @@ export default function App() {
                 </main>
                 <Footer/>
             </div>
-        </BrowserRouter>
-    );
+        </BrowserRouter>);
 }

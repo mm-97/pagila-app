@@ -43,17 +43,14 @@ export default function FilmsPage() {
     if (error) return <ErrorMessage message={error}/>;
     if (!data) return <ErrorMessage message="No data available."/>;
 
-    return (
-        <div className="page">
+    return (<div className="page">
             <SectionTitle
                 title="Films"
                 subtitle="Browse the film catalog exposed by the Spring Boot API."
             />
 
             <div className="grid grid--cards">
-                {data.content.map((film) => (
-                    <FilmCard key={film.filmId} film={film}/>
-                ))}
+                {data.content.map((film) => (<FilmCard key={film.filmId} film={film}/>))}
             </div>
 
             <Pagination
@@ -62,6 +59,5 @@ export default function FilmsPage() {
                 onPrev={() => goToPage(Math.max(0, data?.number - 1))}
                 onNext={() => goToPage(Math.min(data?.totalPages - 1, data?.number + 1))}
             />
-        </div>
-    );
+        </div>);
 }

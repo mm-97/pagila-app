@@ -6,8 +6,7 @@ type Props = {
 };
 
 export default function FilmCard({film}: Props) {
-    return (
-        <article className="card panel-animated">
+    return (<article className="card panel-animated">
             <div className="card__content">
                 <div className="card__top">
                     <h3>{film.title}</h3>
@@ -27,6 +26,5 @@ export default function FilmCard({film}: Props) {
                     View details
                 </Link>
             </div>
-        </article>
-    );
+        </article>);
 }

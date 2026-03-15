@@ -2,31 +2,31 @@ import {Link, NavLink} from "react-router-dom";
 
 export default function Header() {
     return (<header className="header">
-            <div className="container header__inner">
-                <Link to="/" className="brand">
-                    PagilaLab
-                </Link>
+        <div className="container header__inner">
+            <Link to="/" className="brand">
+                PagilaLab
+            </Link>
 
-                <nav className="nav">
-                    <NavLink to="/films" className="nav__link">
-                        Films
-                    </NavLink>
-                    <NavLink to="/actors" className="nav__link">
-                        Actors
-                    </NavLink>
-                    <NavLink to="/categories" className="nav__link">
-                        Categories
-                    </NavLink>
-                    <NavLink to="/search" className="nav__link">
-                        Search
-                    </NavLink>
-                    <NavLink to="/addFilm" className="nav__link">
-                        Add Film
-                    </NavLink>
-                    <NavLink to="/info" className="nav__link">
-                        Info
-                    </NavLink>
-                </nav>
-            </div>
-        </header>);
+            <nav className="nav">
+                <NavLink to="/films" className="nav__link">
+                    Films
+                </NavLink>
+                <NavLink to="/actors" className="nav__link">
+                    Actors
+                </NavLink>
+                <NavLink to="/categories" className="nav__link">
+                    Categories
+                </NavLink>
+                <NavLink to="/search" className="nav__link">
+                    Search
+                </NavLink>
+                <NavLink to="/addFilm" className="nav__link">
+                    Add Film
+                </NavLink>
+                <NavLink to="/info" className="nav__link">
+                    Info
+                </NavLink>
+            </nav>
+        </div>
+    </header>);
 }

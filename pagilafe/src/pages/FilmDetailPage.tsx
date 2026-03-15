@@ -34,8 +34,7 @@ export default function FilmDetailPage() {
     if (error) return <ErrorMessage message={error}/>;
     if (!film) return <ErrorMessage message="Film not found."/>;
 
-    return (
-        <div className="page">
+    return (<div className="page">
             <div className="panel panel-animated">
                 <div className="detail-header">
                     <div>
@@ -65,23 +64,18 @@ export default function FilmDetailPage() {
                 <div className="panel panel-animated">
                     <h2>Actors</h2>
                     <ul className="clean-list">
-                        {film.actors.map((actor) => (
-                            <li key={actor.actorId}>
+                        {film.actors.map((actor) => (<li key={actor.actorId}>
                                 {actor.firstName} {actor.lastName}
-                            </li>
-                        ))}
+                            </li>))}
                     </ul>
                 </div>
 
                 <div className="panel panel-animated">
                     <h2>Categories</h2>
                     <ul className="clean-list">
-                        {film.categories.map((category) => (
-                            <li key={category.categoryId}>{category.name}</li>
-                        ))}
+                        {film.categories.map((category) => (<li key={category.categoryId}>{category.name}</li>))}
                     </ul>
                 </div>
             </div>
-        </div>
-    );
+        </div>);
 }

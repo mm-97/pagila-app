@@ -33,8 +33,7 @@ export default function CategoriesPage() {
     if (error) return <ErrorMessage message={error}/>;
     if (!data) return <ErrorMessage message="No data available."/>;
 
-    return (
-        <div className="page">
+    return (<div className="page">
             <SectionTitle title="Categories" subtitle="Film categories exposed by the Spring Boot API."/>
 
             <div className="list-panel">
@@ -42,8 +41,7 @@ export default function CategoriesPage() {
                     <div key={category.categoryId} className="list-row panel-animated">
                         <span>{page * pageSize + index + 1}</span>
                         <span>{category.name}</span>
-                    </div>
-                ))}
+                    </div>))}
             </div>
 
             <Pagination
@@ -52,6 +50,5 @@ export default function CategoriesPage() {
                 onPrev={() => setPage((p) => Math.max(0, p - 1))}
                 onNext={() => setPage((p) => Math.min(data.totalPages - 1, p + 1))}
             />
-        </div>
-    );
+        </div>);
 }

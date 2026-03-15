@@ -4,8 +4,7 @@ export default function Footer() {
     const [isHovering, setIsHovering] = useState(false);
     const [mousePosition, setMousePosition] = useState({x: 0, y: 0});
 
-    return (
-        <>
+    return (<>
             <a
                 href="https://github.com/mm-97"
                 target="_blank"
@@ -13,12 +12,9 @@ export default function Footer() {
                 className="footer footer-link-area"
                 onMouseEnter={() => setIsHovering(true)}
                 onMouseLeave={() => setIsHovering(false)}
-                onMouseMove={(e) =>
-                    setMousePosition({
-                        x: e.clientX,
-                        y: e.clientY - 70,
-                    })
-                }
+                onMouseMove={(e) => setMousePosition({
+                    x: e.clientX, y: e.clientY - 70,
+                })}
             >
                 <div className="container footer-content">
           <span className="footer-text">
@@ -66,17 +62,13 @@ export default function Footer() {
                 </div>
             </a>
 
-            {isHovering && (
-                <div
+            {isHovering && (<div
                     className="footer-tooltip"
                     style={{
-                        left: mousePosition.x + 16,
-                        top: mousePosition.y + 16,
+                        left: mousePosition.x + 16, top: mousePosition.y + 16,
                     }}
                 >
                     Click, don’t be afraid :)
-                </div>
-            )}
-        </>
-    );
+                </div>)}
+        </>);
 }

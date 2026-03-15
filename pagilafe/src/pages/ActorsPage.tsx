@@ -33,8 +33,7 @@ export default function ActorsPage() {
     if (error) return <ErrorMessage message={error}/>;
     if (!data) return <ErrorMessage message="No data available."/>;
 
-    return (
-        <div className="page">
+    return (<div className="page">
             <SectionTitle
                 title="Actors"
                 subtitle="Paginated list of actors exposed by the Spring Boot API, with avatar images dynamically generated using the DiceBear API."
@@ -49,8 +48,7 @@ export default function ActorsPage() {
                             className="actor-avatar"
                         />
                         <span>{actor.firstName} {actor.lastName}</span>
-                    </div>
-                ))}
+                    </div>))}
             </div>
 
             <Pagination
@@ -59,6 +57,5 @@ export default function ActorsPage() {
                 onPrev={() => setPage((p) => Math.max(0, p - 1))}
                 onNext={() => setPage((p) => Math.min(data.totalPages - 1, p + 1))}
             />
-        </div>
-    );
+        </div>);
 }
