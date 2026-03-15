@@ -1,5 +1,6 @@
 package org.mm97.pagilab.controllers;
 
+import org.mm97.pagilab.dto.CreateFilmRequestDto;
 import org.mm97.pagilab.dto.FilmDetailDto;
 import org.mm97.pagilab.dto.FilmSummaryDto;
 import org.mm97.pagilab.mappers.ApiMapper;
@@ -7,6 +8,7 @@ import org.mm97.pagilab.services.FilmService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -103,5 +105,12 @@ public class FilmController {
         return ResponseEntity.ok(
                 filmService.getFilmsByCategoryId(categoryId).stream().map(ApiMapper::toFilmSummaryDto).toList()
         );
+    }
+
+    @PostMapping
+    public ResponseEntity<FilmSummaryDto> createFilm(@RequestBody CreateFilmRequestDto request) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(ApiMapper.toFilmSummaryDto(filmService.createFilm(request)));
     }
 }

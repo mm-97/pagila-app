@@ -21,4 +21,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
             ORDER BY c.name
             """)
     List<Category> findAllByFilmId(@Param("filmId") Integer filmId);
+
+    List<Category> findAllByCategoryIdIn(List<Integer> categoryIds);
 }

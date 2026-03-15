@@ -33,4 +33,6 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
             ORDER BY a.lastName, a.firstName
             """)
     List<Actor> findAllByFilmId(@Param("filmId") Integer filmId);
+
+    List<Actor> findAllByActorIdIn(List<Integer> actorIds);
 }
