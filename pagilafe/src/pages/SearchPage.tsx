@@ -1,11 +1,21 @@
 import {useEffect, useMemo, useState} from "react";
-import {api} from "../api/client";
-import type {FilmSummaryDto, PageResponse} from "../types/api";
-import ErrorMessage from "../components/ErrorMessage";
-import FilmCard from "../components/FilmCard";
-import Loading from "../components/Loading";
-import Pagination from "../components/Pagination";
-import SectionTitle from "../components/SectionTitle";
+import {api} from "../api/client.ts";
+import type {FilmSummaryDto, PageResponse} from "../types/api.ts";
+import ErrorMessage from "../components/ErrorMessage.tsx";
+import FilmCard from "../components/FilmCard.tsx";
+import Loading from "../components/Loading.tsx";
+import Pagination from "../components/Pagination.tsx";
+import SectionTitle from "../components/SectionTitle.tsx";
+
+const PLACEHOLDERS = [
+    "Search by movie name or description...",
+    "Try: Pinocchio...",
+    "Try: A Fanciful Saga...",
+    "Try: Clones...",
+    "Try: A Insightful Saga...",
+    "Try: Love...",
+    "Try: Alien...",
+];
 
 function useDebouncedValue<T>(value: T, delay = 400): T {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -29,6 +39,61 @@ export default function SearchPage() {
     const [data, setData] = useState<PageResponse<FilmSummaryDto> | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    const [animatedPlaceholder, setAnimatedPlaceholder] = useState("");
+    const [placeholderIndex, setPlaceholderIndex] = useState(0);
+    const [placeholderCharIndex, setPlaceholderCharIndex] = useState(0);
+    const [isDeletingPlaceholder, setIsDeletingPlaceholder] = useState(false);
+
+    useEffect(() => {
+        if (inputValue.length > 0) {
+            return;
+        }
+
+        const currentPhrase = PLACEHOLDERS[placeholderIndex];
+        let timeout = 100;
+        const base_timeout = 2300;
+
+        if (!isDeletingPlaceholder && placeholderCharIndex < currentPhrase.length) {
+            // start writing
+            timeout = base_timeout /currentPhrase.length;
+        } else if (!isDeletingPlaceholder && placeholderCharIndex === currentPhrase.length) {
+            // stop writing
+            timeout = base_timeout/3.14;
+        } else if (isDeletingPlaceholder && placeholderCharIndex > 0) {
+            // start deleting
+            timeout = base_timeout /(currentPhrase.length*1.2);
+        } else if (isDeletingPlaceholder && placeholderCharIndex === 0) {
+            // stop deleting
+            timeout = 100;
+        }
+
+        const timer = window.setTimeout(() => {
+            if (!isDeletingPlaceholder) {
+                if (placeholderCharIndex < currentPhrase.length) {
+                    const nextCharIndex = placeholderCharIndex + 1;
+                    setAnimatedPlaceholder(currentPhrase.slice(0, nextCharIndex));
+                    setPlaceholderCharIndex(nextCharIndex);
+                } else {
+                    setIsDeletingPlaceholder(true);
+                }
+            } else {
+                if (placeholderCharIndex > 0) {
+                    const nextCharIndex = placeholderCharIndex - 1;
+                    setAnimatedPlaceholder(currentPhrase.slice(0, nextCharIndex));
+                    setPlaceholderCharIndex(nextCharIndex);
+                } else {
+                    setIsDeletingPlaceholder(false);
+                    setPlaceholderIndex((prev) => (prev + 1) % PLACEHOLDERS.length);
+                }
+            }
+        }, timeout);
+
+        return () => {
+            window.clearTimeout(timer);
+        };
+    }, [inputValue, placeholderIndex, placeholderCharIndex, isDeletingPlaceholder]);
+
 
     const trimmedInput = useMemo(() => inputValue.trim(), [inputValue]);
     const debouncedQuery = useDebouncedValue(trimmedInput, 450);
@@ -90,7 +155,7 @@ export default function SearchPage() {
                         type="text"
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
-                        placeholder="Type a film title or keyword..."
+                        placeholder={inputValue ? "" : animatedPlaceholder}
                         className="search-input"
                     />
 

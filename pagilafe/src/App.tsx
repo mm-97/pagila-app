@@ -6,7 +6,7 @@ import FilmsPage from "./pages/FilmsPage";
 import FilmDetailPage from "./pages/FilmDetailPage";
 import ActorsPage from "./pages/ActorsPage";
 import CategoriesPage from "./pages/CategoriesPage";
-import SearchPage from "./components/SearchPage.tsx";
+import SearchPage from "./pages/SearchPage.tsx";
 
 export default function App() {
     return (
